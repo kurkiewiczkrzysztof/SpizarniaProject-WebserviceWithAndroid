@@ -1,0 +1,539 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DB_A172D4_slowo2017Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Kat_przepis">
+          <Key>
+            <PropertyRef Name="idKat_przepis" />
+          </Key>
+          <Property Name="idKat_przepis" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nazwa_kat_prze" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kat_Zywnosc">
+          <Key>
+            <PropertyRef Name="idkat_zywnosc" />
+          </Key>
+          <Property Name="idkat_zywnosc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa_kat" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Przepis">
+          <Key>
+            <PropertyRef Name="idPrzepis" />
+          </Key>
+          <Property Name="idPrzepis" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="opis" Type="nvarchar" MaxLength="500" />
+          <Property Name="idKat_przepis" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SkladnikiDoPrzepisu">
+          <Key>
+            <PropertyRef Name="idSkladnikPrzepis" />
+          </Key>
+          <Property Name="idSkladnikPrzepis" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ilosc" Type="float" Nullable="false" />
+          <Property Name="idPrzepis" Type="int" Nullable="false" />
+          <Property Name="idZywnosc" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SkladnikiWSpizarni">
+          <Key>
+            <PropertyRef Name="idSkladnikSpiz" />
+          </Key>
+          <Property Name="idSkladnikSpiz" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ilosc" Type="float" />
+          <Property Name="idSpizarnia" Type="int" />
+          <Property Name="idZywnosc" Type="int" />
+        </EntityType>
+        <EntityType Name="Spizarnia">
+          <Key>
+            <PropertyRef Name="idSpizarnia" />
+          </Key>
+          <Property Name="idSpizarnia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="nr_seryjny" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="idUzytkownik" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Uzytkownik">
+          <Key>
+            <PropertyRef Name="idUzytkownik" />
+          </Key>
+          <Property Name="idUzytkownik" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Haslo" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Zywnosc">
+          <Key>
+            <PropertyRef Name="idZywnosc" />
+          </Key>
+          <Property Name="idZywnosc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="idkat_zywnosc" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Przepis_Kat_przepis">
+          <End Role="Kat_przepis" Type="Self.Kat_przepis" Multiplicity="1" />
+          <End Role="Przepis" Type="Self.Przepis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kat_przepis">
+              <PropertyRef Name="idKat_przepis" />
+            </Principal>
+            <Dependent Role="Przepis">
+              <PropertyRef Name="idKat_przepis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SkladnikiDoPrzepisu_Przepis">
+          <End Role="Przepis" Type="Self.Przepis" Multiplicity="1" />
+          <End Role="SkladnikiDoPrzepisu" Type="Self.SkladnikiDoPrzepisu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Przepis">
+              <PropertyRef Name="idPrzepis" />
+            </Principal>
+            <Dependent Role="SkladnikiDoPrzepisu">
+              <PropertyRef Name="idPrzepis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SkladnikiDoPrzepisu_Zywnosc">
+          <End Role="Zywnosc" Type="Self.Zywnosc" Multiplicity="1" />
+          <End Role="SkladnikiDoPrzepisu" Type="Self.SkladnikiDoPrzepisu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zywnosc">
+              <PropertyRef Name="idZywnosc" />
+            </Principal>
+            <Dependent Role="SkladnikiDoPrzepisu">
+              <PropertyRef Name="idZywnosc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SkladnikiWSpizarni_Spizarnia">
+          <End Role="Spizarnia" Type="Self.Spizarnia" Multiplicity="0..1" />
+          <End Role="SkladnikiWSpizarni" Type="Self.SkladnikiWSpizarni" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spizarnia">
+              <PropertyRef Name="idSpizarnia" />
+            </Principal>
+            <Dependent Role="SkladnikiWSpizarni">
+              <PropertyRef Name="idSpizarnia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SkladnikiWSpizarni_Zywnosc">
+          <End Role="Zywnosc" Type="Self.Zywnosc" Multiplicity="0..1" />
+          <End Role="SkladnikiWSpizarni" Type="Self.SkladnikiWSpizarni" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zywnosc">
+              <PropertyRef Name="idZywnosc" />
+            </Principal>
+            <Dependent Role="SkladnikiWSpizarni">
+              <PropertyRef Name="idZywnosc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Spizarnia_Uzytkownik">
+          <End Role="Uzytkownik" Type="Self.Uzytkownik" Multiplicity="0..1" />
+          <End Role="Spizarnia" Type="Self.Spizarnia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uzytkownik">
+              <PropertyRef Name="idUzytkownik" />
+            </Principal>
+            <Dependent Role="Spizarnia">
+              <PropertyRef Name="idUzytkownik" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zywnosc_Kat_Zywnosc">
+          <End Role="Kat_Zywnosc" Type="Self.Kat_Zywnosc" Multiplicity="1" />
+          <End Role="Zywnosc" Type="Self.Zywnosc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kat_Zywnosc">
+              <PropertyRef Name="idkat_zywnosc" />
+            </Principal>
+            <Dependent Role="Zywnosc">
+              <PropertyRef Name="idkat_zywnosc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_A172D4_slowo2017ModelStoreContainer">
+          <EntitySet Name="Kat_przepis" EntityType="Self.Kat_przepis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kat_Zywnosc" EntityType="Self.Kat_Zywnosc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Przepis" EntityType="Self.Przepis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SkladnikiDoPrzepisu" EntityType="Self.SkladnikiDoPrzepisu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SkladnikiWSpizarni" EntityType="Self.SkladnikiWSpizarni" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Spizarnia" EntityType="Self.Spizarnia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Uzytkownik" EntityType="Self.Uzytkownik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zywnosc" EntityType="Self.Zywnosc" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Przepis_Kat_przepis" Association="Self.FK_Przepis_Kat_przepis">
+            <End Role="Kat_przepis" EntitySet="Kat_przepis" />
+            <End Role="Przepis" EntitySet="Przepis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SkladnikiDoPrzepisu_Przepis" Association="Self.FK_SkladnikiDoPrzepisu_Przepis">
+            <End Role="Przepis" EntitySet="Przepis" />
+            <End Role="SkladnikiDoPrzepisu" EntitySet="SkladnikiDoPrzepisu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SkladnikiDoPrzepisu_Zywnosc" Association="Self.FK_SkladnikiDoPrzepisu_Zywnosc">
+            <End Role="Zywnosc" EntitySet="Zywnosc" />
+            <End Role="SkladnikiDoPrzepisu" EntitySet="SkladnikiDoPrzepisu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SkladnikiWSpizarni_Spizarnia" Association="Self.FK_SkladnikiWSpizarni_Spizarnia">
+            <End Role="Spizarnia" EntitySet="Spizarnia" />
+            <End Role="SkladnikiWSpizarni" EntitySet="SkladnikiWSpizarni" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SkladnikiWSpizarni_Zywnosc" Association="Self.FK_SkladnikiWSpizarni_Zywnosc">
+            <End Role="Zywnosc" EntitySet="Zywnosc" />
+            <End Role="SkladnikiWSpizarni" EntitySet="SkladnikiWSpizarni" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Spizarnia_Uzytkownik" Association="Self.FK_Spizarnia_Uzytkownik">
+            <End Role="Uzytkownik" EntitySet="Uzytkownik" />
+            <End Role="Spizarnia" EntitySet="Spizarnia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zywnosc_Kat_Zywnosc" Association="Self.FK_Zywnosc_Kat_Zywnosc">
+            <End Role="Kat_Zywnosc" EntitySet="Kat_Zywnosc" />
+            <End Role="Zywnosc" EntitySet="Zywnosc" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_A172D4_slowo2017Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Kat_przepis">
+          <Key>
+            <PropertyRef Name="idKat_przepis" />
+          </Key>
+          <Property Name="idKat_przepis" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nazwa_kat_prze" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Przepis" Relationship="Self.FK_Przepis_Kat_przepis" FromRole="Kat_przepis" ToRole="Przepis" />
+        </EntityType>
+        <EntityType Name="Kat_Zywnosc">
+          <Key>
+            <PropertyRef Name="idkat_zywnosc" />
+          </Key>
+          <Property Name="idkat_zywnosc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa_kat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Zywnosc" Relationship="Self.FK_Zywnosc_Kat_Zywnosc" FromRole="Kat_Zywnosc" ToRole="Zywnosc" />
+        </EntityType>
+        <EntityType Name="Przepis">
+          <Key>
+            <PropertyRef Name="idPrzepis" />
+          </Key>
+          <Property Name="idPrzepis" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="opis" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="idKat_przepis" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Kat_przepis" Relationship="Self.FK_Przepis_Kat_przepis" FromRole="Przepis" ToRole="Kat_przepis" />
+          <NavigationProperty Name="SkladnikiDoPrzepisu" Relationship="Self.FK_SkladnikiDoPrzepisu_Przepis" FromRole="Przepis" ToRole="SkladnikiDoPrzepisu" />
+        </EntityType>
+        <EntityType Name="SkladnikiDoPrzepisu">
+          <Key>
+            <PropertyRef Name="idSkladnikPrzepis" />
+          </Key>
+          <Property Name="idSkladnikPrzepis" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ilosc" Type="Double" Nullable="false" />
+          <Property Name="idPrzepis" Type="Int32" Nullable="false" />
+          <Property Name="idZywnosc" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Przepis" Relationship="Self.FK_SkladnikiDoPrzepisu_Przepis" FromRole="SkladnikiDoPrzepisu" ToRole="Przepis" />
+          <NavigationProperty Name="Zywnosc" Relationship="Self.FK_SkladnikiDoPrzepisu_Zywnosc" FromRole="SkladnikiDoPrzepisu" ToRole="Zywnosc" />
+        </EntityType>
+        <EntityType Name="SkladnikiWSpizarni">
+          <Key>
+            <PropertyRef Name="idSkladnikSpiz" />
+          </Key>
+          <Property Name="idSkladnikSpiz" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ilosc" Type="Double" />
+          <Property Name="idSpizarnia" Type="Int32" />
+          <Property Name="idZywnosc" Type="Int32" />
+          <NavigationProperty Name="Spizarnia" Relationship="Self.FK_SkladnikiWSpizarni_Spizarnia" FromRole="SkladnikiWSpizarni" ToRole="Spizarnia" />
+          <NavigationProperty Name="Zywnosc" Relationship="Self.FK_SkladnikiWSpizarni_Zywnosc" FromRole="SkladnikiWSpizarni" ToRole="Zywnosc" />
+        </EntityType>
+        <EntityType Name="Spizarnia">
+          <Key>
+            <PropertyRef Name="idSpizarnia" />
+          </Key>
+          <Property Name="idSpizarnia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nr_seryjny" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idUzytkownik" Type="Int32" />
+          <NavigationProperty Name="SkladnikiWSpizarni" Relationship="Self.FK_SkladnikiWSpizarni_Spizarnia" FromRole="Spizarnia" ToRole="SkladnikiWSpizarni" />
+          <NavigationProperty Name="Uzytkownik" Relationship="Self.FK_Spizarnia_Uzytkownik" FromRole="Spizarnia" ToRole="Uzytkownik" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Uzytkownik">
+          <Key>
+            <PropertyRef Name="idUzytkownik" />
+          </Key>
+          <Property Name="idUzytkownik" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Haslo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Spizarnia" Relationship="Self.FK_Spizarnia_Uzytkownik" FromRole="Uzytkownik" ToRole="Spizarnia" />
+        </EntityType>
+        <EntityType Name="Zywnosc">
+          <Key>
+            <PropertyRef Name="idZywnosc" />
+          </Key>
+          <Property Name="idZywnosc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idkat_zywnosc" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Kat_Zywnosc" Relationship="Self.FK_Zywnosc_Kat_Zywnosc" FromRole="Zywnosc" ToRole="Kat_Zywnosc" />
+          <NavigationProperty Name="SkladnikiDoPrzepisu" Relationship="Self.FK_SkladnikiDoPrzepisu_Zywnosc" FromRole="Zywnosc" ToRole="SkladnikiDoPrzepisu" />
+          <NavigationProperty Name="SkladnikiWSpizarni" Relationship="Self.FK_SkladnikiWSpizarni_Zywnosc" FromRole="Zywnosc" ToRole="SkladnikiWSpizarni" />
+        </EntityType>
+        <Association Name="FK_Przepis_Kat_przepis">
+          <End Role="Kat_przepis" Type="Self.Kat_przepis" Multiplicity="1" />
+          <End Role="Przepis" Type="Self.Przepis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kat_przepis">
+              <PropertyRef Name="idKat_przepis" />
+            </Principal>
+            <Dependent Role="Przepis">
+              <PropertyRef Name="idKat_przepis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zywnosc_Kat_Zywnosc">
+          <End Role="Kat_Zywnosc" Type="Self.Kat_Zywnosc" Multiplicity="1" />
+          <End Role="Zywnosc" Type="Self.Zywnosc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kat_Zywnosc">
+              <PropertyRef Name="idkat_zywnosc" />
+            </Principal>
+            <Dependent Role="Zywnosc">
+              <PropertyRef Name="idkat_zywnosc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SkladnikiDoPrzepisu_Przepis">
+          <End Role="Przepis" Type="Self.Przepis" Multiplicity="1" />
+          <End Role="SkladnikiDoPrzepisu" Type="Self.SkladnikiDoPrzepisu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Przepis">
+              <PropertyRef Name="idPrzepis" />
+            </Principal>
+            <Dependent Role="SkladnikiDoPrzepisu">
+              <PropertyRef Name="idPrzepis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SkladnikiDoPrzepisu_Zywnosc">
+          <End Role="Zywnosc" Type="Self.Zywnosc" Multiplicity="1" />
+          <End Role="SkladnikiDoPrzepisu" Type="Self.SkladnikiDoPrzepisu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zywnosc">
+              <PropertyRef Name="idZywnosc" />
+            </Principal>
+            <Dependent Role="SkladnikiDoPrzepisu">
+              <PropertyRef Name="idZywnosc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SkladnikiWSpizarni_Spizarnia">
+          <End Role="Spizarnia" Type="Self.Spizarnia" Multiplicity="0..1" />
+          <End Role="SkladnikiWSpizarni" Type="Self.SkladnikiWSpizarni" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spizarnia">
+              <PropertyRef Name="idSpizarnia" />
+            </Principal>
+            <Dependent Role="SkladnikiWSpizarni">
+              <PropertyRef Name="idSpizarnia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SkladnikiWSpizarni_Zywnosc">
+          <End Role="Zywnosc" Type="Self.Zywnosc" Multiplicity="0..1" />
+          <End Role="SkladnikiWSpizarni" Type="Self.SkladnikiWSpizarni" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zywnosc">
+              <PropertyRef Name="idZywnosc" />
+            </Principal>
+            <Dependent Role="SkladnikiWSpizarni">
+              <PropertyRef Name="idZywnosc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Spizarnia_Uzytkownik">
+          <End Role="Uzytkownik" Type="Self.Uzytkownik" Multiplicity="0..1" />
+          <End Role="Spizarnia" Type="Self.Spizarnia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uzytkownik">
+              <PropertyRef Name="idUzytkownik" />
+            </Principal>
+            <Dependent Role="Spizarnia">
+              <PropertyRef Name="idUzytkownik" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_A172D4_slowo2017Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Kat_przepis" EntityType="Self.Kat_przepis" />
+          <EntitySet Name="Kat_Zywnosc" EntityType="Self.Kat_Zywnosc" />
+          <EntitySet Name="Przepis" EntityType="Self.Przepis" />
+          <EntitySet Name="SkladnikiDoPrzepisu" EntityType="Self.SkladnikiDoPrzepisu" />
+          <EntitySet Name="SkladnikiWSpizarni" EntityType="Self.SkladnikiWSpizarni" />
+          <EntitySet Name="Spizarnia" EntityType="Self.Spizarnia" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Uzytkownik" EntityType="Self.Uzytkownik" />
+          <EntitySet Name="Zywnosc" EntityType="Self.Zywnosc" />
+          <AssociationSet Name="FK_Przepis_Kat_przepis" Association="Self.FK_Przepis_Kat_przepis">
+            <End Role="Kat_przepis" EntitySet="Kat_przepis" />
+            <End Role="Przepis" EntitySet="Przepis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zywnosc_Kat_Zywnosc" Association="Self.FK_Zywnosc_Kat_Zywnosc">
+            <End Role="Kat_Zywnosc" EntitySet="Kat_Zywnosc" />
+            <End Role="Zywnosc" EntitySet="Zywnosc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SkladnikiDoPrzepisu_Przepis" Association="Self.FK_SkladnikiDoPrzepisu_Przepis">
+            <End Role="Przepis" EntitySet="Przepis" />
+            <End Role="SkladnikiDoPrzepisu" EntitySet="SkladnikiDoPrzepisu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SkladnikiDoPrzepisu_Zywnosc" Association="Self.FK_SkladnikiDoPrzepisu_Zywnosc">
+            <End Role="Zywnosc" EntitySet="Zywnosc" />
+            <End Role="SkladnikiDoPrzepisu" EntitySet="SkladnikiDoPrzepisu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SkladnikiWSpizarni_Spizarnia" Association="Self.FK_SkladnikiWSpizarni_Spizarnia">
+            <End Role="Spizarnia" EntitySet="Spizarnia" />
+            <End Role="SkladnikiWSpizarni" EntitySet="SkladnikiWSpizarni" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SkladnikiWSpizarni_Zywnosc" Association="Self.FK_SkladnikiWSpizarni_Zywnosc">
+            <End Role="Zywnosc" EntitySet="Zywnosc" />
+            <End Role="SkladnikiWSpizarni" EntitySet="SkladnikiWSpizarni" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Spizarnia_Uzytkownik" Association="Self.FK_Spizarnia_Uzytkownik">
+            <End Role="Uzytkownik" EntitySet="Uzytkownik" />
+            <End Role="Spizarnia" EntitySet="Spizarnia" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_A172D4_slowo2017ModelStoreContainer" CdmEntityContainer="DB_A172D4_slowo2017Entities">
+          <EntitySetMapping Name="Kat_przepis">
+            <EntityTypeMapping TypeName="DB_A172D4_slowo2017Model.Kat_przepis">
+              <MappingFragment StoreEntitySet="Kat_przepis">
+                <ScalarProperty Name="idKat_przepis" ColumnName="idKat_przepis" />
+                <ScalarProperty Name="nazwa_kat_prze" ColumnName="nazwa_kat_prze" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kat_Zywnosc">
+            <EntityTypeMapping TypeName="DB_A172D4_slowo2017Model.Kat_Zywnosc">
+              <MappingFragment StoreEntitySet="Kat_Zywnosc">
+                <ScalarProperty Name="idkat_zywnosc" ColumnName="idkat_zywnosc" />
+                <ScalarProperty Name="Nazwa_kat" ColumnName="Nazwa_kat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Przepis">
+            <EntityTypeMapping TypeName="DB_A172D4_slowo2017Model.Przepis">
+              <MappingFragment StoreEntitySet="Przepis">
+                <ScalarProperty Name="idPrzepis" ColumnName="idPrzepis" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="opis" ColumnName="opis" />
+                <ScalarProperty Name="idKat_przepis" ColumnName="idKat_przepis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SkladnikiDoPrzepisu">
+            <EntityTypeMapping TypeName="DB_A172D4_slowo2017Model.SkladnikiDoPrzepisu">
+              <MappingFragment StoreEntitySet="SkladnikiDoPrzepisu">
+                <ScalarProperty Name="idSkladnikPrzepis" ColumnName="idSkladnikPrzepis" />
+                <ScalarProperty Name="ilosc" ColumnName="ilosc" />
+                <ScalarProperty Name="idPrzepis" ColumnName="idPrzepis" />
+                <ScalarProperty Name="idZywnosc" ColumnName="idZywnosc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SkladnikiWSpizarni">
+            <EntityTypeMapping TypeName="DB_A172D4_slowo2017Model.SkladnikiWSpizarni">
+              <MappingFragment StoreEntitySet="SkladnikiWSpizarni">
+                <ScalarProperty Name="idSkladnikSpiz" ColumnName="idSkladnikSpiz" />
+                <ScalarProperty Name="Ilosc" ColumnName="Ilosc" />
+                <ScalarProperty Name="idSpizarnia" ColumnName="idSpizarnia" />
+                <ScalarProperty Name="idZywnosc" ColumnName="idZywnosc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Spizarnia">
+            <EntityTypeMapping TypeName="DB_A172D4_slowo2017Model.Spizarnia">
+              <MappingFragment StoreEntitySet="Spizarnia">
+                <ScalarProperty Name="idSpizarnia" ColumnName="idSpizarnia" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="nr_seryjny" ColumnName="nr_seryjny" />
+                <ScalarProperty Name="idUzytkownik" ColumnName="idUzytkownik" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DB_A172D4_slowo2017Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uzytkownik">
+            <EntityTypeMapping TypeName="DB_A172D4_slowo2017Model.Uzytkownik">
+              <MappingFragment StoreEntitySet="Uzytkownik">
+                <ScalarProperty Name="idUzytkownik" ColumnName="idUzytkownik" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Haslo" ColumnName="Haslo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zywnosc">
+            <EntityTypeMapping TypeName="DB_A172D4_slowo2017Model.Zywnosc">
+              <MappingFragment StoreEntitySet="Zywnosc">
+                <ScalarProperty Name="idZywnosc" ColumnName="idZywnosc" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="idkat_zywnosc" ColumnName="idkat_zywnosc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

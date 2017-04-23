@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="33657fb0e4b145f48275640015b811fa" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_A172D4_slowo2017Model.Kat_przepis" Width="1.5" PointX="7" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A172D4_slowo2017Model.Kat_Zywnosc" Width="1.5" PointX="4" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A172D4_slowo2017Model.Przepis" Width="1.5" PointX="7" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A172D4_slowo2017Model.SkladnikiDoPrzepisu" Width="1.5" PointX="7" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A172D4_slowo2017Model.SkladnikiWSpizarni" Width="1.5" PointX="1.375" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A172D4_slowo2017Model.Spizarnia" Width="1.5" PointX="1.375" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A172D4_slowo2017Model.sysdiagrams" Width="1.5" PointX="11.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A172D4_slowo2017Model.Uzytkownik" Width="1.5" PointX="1.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A172D4_slowo2017Model.Zywnosc" Width="1.5" PointX="4" PointY="6.25" IsExpanded="true" />
+        <AssociationConnector Association="DB_A172D4_slowo2017Model.FK_Przepis_Kat_przepis" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A172D4_slowo2017Model.FK_Zywnosc_Kat_Zywnosc" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A172D4_slowo2017Model.FK_SkladnikiDoPrzepisu_Przepis" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A172D4_slowo2017Model.FK_SkladnikiDoPrzepisu_Zywnosc" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A172D4_slowo2017Model.FK_SkladnikiWSpizarni_Spizarnia" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A172D4_slowo2017Model.FK_SkladnikiWSpizarni_Zywnosc" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A172D4_slowo2017Model.FK_Spizarnia_Uzytkownik" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

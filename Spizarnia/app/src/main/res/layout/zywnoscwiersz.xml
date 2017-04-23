@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Id Zywnosc: "
+            android:textStyle="bold"/>
+        <TextView
+            android:background="#76A5D3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TVidZywnosc"
+            android:text="title"
+            android:padding="10dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nazwa: "
+            android:textStyle="bold"/>
+        <TextView
+            android:background="#76A5D3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TVNazwaZywnosc"
+            android:text="title"
+            android:padding="10dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="id Kategorii: "
+            android:textStyle="bold"/>
+        <TextView
+            android:background="#76A5D3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TVKategoriaZywnosc"
+            android:text="title"
+            android:padding="10dp"
+            android:textStyle="bold"/>
+
+        <!--TO-DO PRZYCISKI U E-->
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Podaj Ilosc"
+            android:id="@+id/edPodajIlosc"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dodaj!"
+            android:id="@+id/btnDodajFinalnieSkladnik"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#FF0000FF"/>
+
+</LinearLayout>

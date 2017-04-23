@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_edytuj_spizarnie_usun_skladnik"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context="com.kurkiewiczfuturetechnology.spizarnia.edytujSpizarnieUsunSkladnik">
+    <TextView
+        android:text="Czy usunąć ?"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/tvNazwaUsun"
+        android:text="Nazwa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#DDDDFF"/>
+    <TextView
+        android:id="@+id/tvIloscUsun"
+        android:text="Ilosc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#CCCCFF"/>
+    />
+    <Button
+        android:id="@+id/btnUsun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Usuń"
+        android:onClick="btnUsunClick"/>
+    <Button android:id="@+id/btnAnuluj"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="btnAnulujClick"
+        android:text="Anuluj"/>
+    />
+</LinearLayout>
